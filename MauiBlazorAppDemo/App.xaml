@@ -20,6 +20,39 @@
                 <Setter Property="Padding" Value="14,10" />
             </Style>
 
+            <!--Additional resources-->
+            <OnPlatform x:TypeArguments="x:String" x:Key="RobotoMedium">
+                <On Platform="Android" Value="Roboto-Medium.ttf#Roboto-Medium" />
+                <On Platform="iOS" Value="SFProDisplayMedium" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="RobotoRegular">
+                <On Platform="Android" Value="Roboto-Regular.ttf#Roboto-Regular" />
+                <On Platform="iOS" Value="SFProDisplayRegular" />
+            </OnPlatform>
+
+            <Color x:Key="backgroundColor">#F1F4F8</Color>
+            <Color x:Key="entryTextColor">#2C2C2C</Color>
+            <Color x:Key="darkorangeColor">#DE6903</Color>
+            <Color x:Key="darkGrayColor">#4A4A4A</Color>
+            <Color x:Key="incomingChatBackgroundColor">#2B3643</Color>
+            <Color x:Key="whiteBackgroundColor">White</Color>
+            <Color x:Key="OverlayColour">#ffffff</Color>
+            <OnPlatform x:Key="NavBarTextColor" x:TypeArguments="Color">
+                <On Platform="iOS" Value="#000000"/>
+                <On Platform="Android" Value="#FFFFFF"/>
+            </OnPlatform>
+            <Color x:Key="textColor">White</Color>
+            <Color x:Key="backgroundWhiteColor">#FFFFFF</Color>
+            <Color x:Key="pinkActivityIndicatorColor">#FF4081</Color>
+            <Color x:Key="errorLabelBackgroundColor">#FFE5E5</Color>
+            <Color x:Key="errorLabelTextColor">#FF4D3D</Color>
+            <Color x:Key="blueLabelColor">#1C83EA</Color>
+            <Color x:Key="greyLabelColor">#3D3D3D</Color>
+            <Color x:Key="darkGreyLabelColor">#616E7F</Color>
+            <Color x:Key="navyBlueLabelColor">#0075E7</Color>
+            <Color x:Key="shadedBlackColor">#415062</Color>
+            <Color x:Key="grayColor">#5A6672</Color>
+            <Color x:Key="pitchBlack">#2D3C52</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
