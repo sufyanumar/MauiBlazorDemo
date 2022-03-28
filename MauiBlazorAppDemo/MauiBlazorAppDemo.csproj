@@ -114,4 +114,8 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Platforms\iOS\Resources\" />
+	</ItemGroup>
+
 </Project>
