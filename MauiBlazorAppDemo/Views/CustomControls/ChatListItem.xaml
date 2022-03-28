@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:MauiBlazorAppDemo.Data"
+             x:Class="MauiBlazorAppDemo.Views.CustomControls.ChatListItem">
+    <ContentView.Resources>
+        <Style TargetType="Label" x:Key="SoureTagLabel">
+            <Setter Property="VerticalTextAlignment" Value="Start"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}"/>
+            <Setter Property="TextColor" Value="#616E7F"/>
+            <Setter Property="FontSize" Value="10"/>
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid ColumnSpacing="0"  Padding="15,13,15,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <AbsoluteLayout HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="0">
+                    <Frame CornerRadius="25" Padding="0" BackgroundColor="#0075E7" IsClippedToBounds="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                        <Image Source="ic_profile_picture" VerticalOptions="End" TranslationY="1"/>
+                        <Frame.HasShadow>
+                            <OnPlatform x:TypeArguments="x:Boolean">
+                                <On Platform="Android" Value="True"/>
+                                <On Platform="iOS" Value="False"/>
+                            </OnPlatform>
+                        </Frame.HasShadow>
+                    </Frame>
+                    <Frame HeightRequest="8" WidthRequest="8" Scale="1.6"  BackgroundColor="White"  CornerRadius="5"  HasShadow="True" AbsoluteLayout.LayoutBounds="0,0.1,0.2,0.2" AbsoluteLayout.LayoutFlags="All">
+                        <Frame.HasShadow>
+                            <OnPlatform x:TypeArguments="x:Boolean">
+                                <On Platform="Android" Value="True"/>
+                                <On Platform="iOS" Value="False"/>
+                            </OnPlatform>
+                        </Frame.HasShadow>
+                    </Frame>
+                    <Frame HeightRequest="5" WidthRequest="5" Scale="1.2"  CornerRadius="5"  HasShadow="True" AbsoluteLayout.LayoutBounds="0,0.1,0.2,0.2" AbsoluteLayout.LayoutFlags="All">
+                        <Frame.HasShadow>
+                            <OnPlatform x:TypeArguments="x:Boolean">
+                                <On Platform="Android" Value="True"/>
+                                <On Platform="iOS" Value="False"/>
+                            </OnPlatform>
+                        </Frame.HasShadow>
+                        <Frame.BackgroundColor>
+                            <Binding Path="IsActiveChat">
+                                <Binding.Converter>
+                                    <control:BooleanToObjectConverter x:TypeArguments="x:String">
+                                        <control:BooleanToObjectConverter.TrueObject>
+                                            <x:String>#04B000</x:String>
+                                        </control:BooleanToObjectConverter.TrueObject>
+                                        <control:BooleanToObjectConverter.FalseObject>
+                                            <x:String>#4A4A4A</x:String>
+                                        </control:BooleanToObjectConverter.FalseObject>
+                                    </control:BooleanToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </Frame.BackgroundColor>
+                        <Frame.BorderColor>
+                            <Binding Path="IsActiveChat">
+                                <Binding.Converter>
+                                    <control:BooleanToObjectConverter x:TypeArguments="x:String">
+                                        <control:BooleanToObjectConverter.TrueObject>
+                                            <x:String>#04B000</x:String>
+                                        </control:BooleanToObjectConverter.TrueObject>
+                                        <control:BooleanToObjectConverter.FalseObject>
+                                            <x:String>#4A4A4A</x:String>
+                                        </control:BooleanToObjectConverter.FalseObject>
+                                    </control:BooleanToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </Frame.BorderColor>
+                    </Frame>
+                </AbsoluteLayout>
+            </Grid>
+            <StackLayout Padding="13,3,2,5" Orientation="Vertical"  Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" FontFamily="{StaticResource RobotoMedium}" Text="{Binding VisitorTitle}" TextColor="Black" FontSize="16" LineBreakMode="TailTruncation" MaxLines="1"/>
+                    <StackLayout Padding="3,6,2,3" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <Label HorizontalOptions="EndAndExpand" IsVisible="{Binding IsActiveChat}" HorizontalTextAlignment="End" LineBreakMode="CharacterWrap" MaxLines="1" Text="{Binding ChatStartedAt, Converter={StaticResource timeConverter}}" FontFamily="{StaticResource RobotoRegular}" TextColor="#666666" FontSize="12" />
+                        <Label HorizontalOptions="EndAndExpand" IsVisible="{Binding IsActiveChat,Converter={StaticResource InverseBoolConverter}}"  HorizontalTextAlignment="End" LineBreakMode="CharacterWrap" MaxLines="1" Text="{Binding ChatEndedAt, Converter={StaticResource timeConverter}}" FontFamily="{StaticResource RobotoRegular}" TextColor="#666666" FontSize="12" />
+                    </StackLayout>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="{Binding ChatText}" Grid.Column="0"  Grid.ColumnSpan="2" MaxLines="1" LineBreakMode="TailTruncation"  FontFamily="{StaticResource RobotoRegular}" Margin="0,0,70,0" FontSize="14">
+                        <Label.TextColor>
+                            <OnPlatform x:TypeArguments="Color">
+                                <On Platform="Android" Value="#636364"/>
+                                <On Platform="iOS" Value="#292929"/>
+                            </OnPlatform>
+                        </Label.TextColor>
+                    </Label>
+                    <StackLayout Orientation="Horizontal" Padding="0,0,-5,0"  Spacing="5" HorizontalOptions="EndAndExpand">
+                        <!--<lottieForms:AnimationView x:Name="AnimationView" VerticalOptions="CenterAndExpand" HorizontalOptions="End"
+                      Animation="data.json"
+                      AutoPlay="True"
+                      RepeatMode="Infinite"
+                      HeightRequest="30" 
+                      WidthRequest="25"
+                      IsVisible="{Binding ShowTypingOnActiveChats}" >
+                        </lottieForms:AnimationView>-->
+                        <Grid Padding="8,4,8,4" VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Frame IsVisible="{Binding ShowUnreadMessageCount}"  Padding="0" Margin="0"  CornerRadius="10"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"   BackgroundColor="#0075E7">
+                                <Frame.HasShadow>
+                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                        <On Platform="Android" Value="True"/>
+                                        <On Platform="iOS" Value="False"/>
+                                    </OnPlatform>
+                                </Frame.HasShadow>
+                                <Label Text="{Binding UnreadMessageCount}" FontAttributes="Bold" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White"/>
+                            </Frame>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                    <Frame IsClippedToBounds="True"  HasShadow="False"  BackgroundColor="#f4f7fa" HorizontalOptions="Start" Padding="5,5,5,5" CornerRadius="2">
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout IsVisible="{Binding IsDesktop}" Orientation="Horizontal" HorizontalOptions="Start">
+                                <Image Source="ic_desktop"/>
+                                <Label Text="Desktop" Style="{StaticResource SoureTagLabel}"/>
+                            </StackLayout>
+                            <StackLayout IsVisible="{Binding IsExitPopup}" Orientation="Horizontal" HorizontalOptions="Start">
+                                <Image Source="ic_desktop"/>
+                                <Label Text="Exit Popup" Style="{StaticResource SoureTagLabel}"/>
+                            </StackLayout>
+                            <StackLayout IsVisible="{Binding IsStatic}" Orientation="Horizontal" HorizontalOptions="Start">
+                                <Image Source="ic_desktop"/>
+                                <Label Text="Static Chat" Style="{StaticResource SoureTagLabel}"/>
+                            </StackLayout>
+                            <StackLayout IsVisible="{Binding IsPrechat}" Orientation="Horizontal" HorizontalOptions="Start">
+                                <Image Source="ic_desktop"/>
+                                <Label Text="Pre Chat" Style="{StaticResource SoureTagLabel}"/>
+                            </StackLayout>
+                            <StackLayout IsVisible="{Binding IsSMS}" Orientation="Horizontal" HorizontalOptions="Start">
+                                <Image Source="ic_mobile"/>
+                                <Label Text="SMS" Style="{StaticResource SoureTagLabel}"/>
+                            </StackLayout>
+                            <StackLayout IsVisible="{Binding IsPhone}" Orientation="Horizontal" HorizontalOptions="Start">
+                                <Image Source="ic_mobile"/>
+                                <Label Text="Mobile" Style="{StaticResource SoureTagLabel}"/>
+                            </StackLayout>
+                            <StackLayout IsVisible="{Binding IsTablet}" Orientation="Horizontal" HorizontalOptions="Start">
+                                <Image Source="ic_tablet"/>
+                                <Label Text="Tablet" Style="{StaticResource SoureTagLabel}"/>
+                            </StackLayout>
+                            <StackLayout IsVisible="{Binding IsFacebook}" Orientation="Horizontal" HorizontalOptions="Start">
+                                <Image Source="ic_facebook"/>
+                                <Label Text="Facebook" Style="{StaticResource SoureTagLabel}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <!--<Frame IsVisible="{Binding Location,Converter={StaticResource stringToVisibiltyConverter}}" IsClippedToBounds="True" HasShadow="False"  BackgroundColor="#f4f7fa" HorizontalOptions="Start" Padding="5,5,5,5" CornerRadius="2">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                            <Label   Text="{Binding Location}" LineBreakMode="TailTruncation" VerticalTextAlignment="Start" FontAttributes="Bold" FontFamily="{StaticResource RobotoMedium}" TextColor="#606D7F" FontSize="10"/>
+                        </StackLayout>
+                    </Frame>-->
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

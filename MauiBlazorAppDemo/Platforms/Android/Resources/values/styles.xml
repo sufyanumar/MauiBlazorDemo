@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="Theme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:colorActivatedHighlight">@android:color/transparent</item>
+  </style>
+	<style name="MainTheme" parent="Maui.SplashTheme">
+		<item name="android:actionBarStyle">@style/MyTheme.ActionBarStyle</item>
+  </style>
+	<style name="MyTheme.ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+		<item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
+	</style>
+
+	<style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+		<item name="android:textColor">@android:color/white</item>
+	</style>
+  <!-- Base theme applied no matter what API -->
+  <style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!--If you are using revision 22.1 please use just windowNoTitle. Without android:-->
+    <item name="windowNoTitle">true</item>
+    <!--We will be using the toolbar so no need to show ActionBar-->
+    <item name="windowActionBar">false</item>
+    <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette -->
+    <!-- colorPrimary is used for the default action bar background -->
+    <item name="colorPrimary">#0075E7</item>
+    <!-- colorPrimaryDark is used for the status bar -->
+    <item name="colorPrimaryDark">#1976D2</item>
+    <!-- colorAccent is used as the default value for colorControlActivated
+         which is used to tint widgets -->
+    <item name="colorAccent">#2196f3</item>
+    <!-- You can also set colorControlNormal, colorControlActivated
+         colorControlHighlight and colorSwitchThumbNormal. -->
+    <item name="colorSwitchThumbNormal">#4A4A4A</item>
+    <item name="windowActionModeOverlay">true</item>
+    <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:colorActivatedHighlight">@android:color/transparent</item>
+  </style>
+  <style name="MainPageTheme" parent="MainTheme">
+    <item name="colorAccent">#0EEB02</item>
+  </style>
+    <style name="LoginPageTheme" parent="MainTheme">
+    <item name="colorAccent">#1C83EA</item>
+  </style>
+  <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">#2196f3</item>
+  </style>
+  <style name="AppToolbarTheme" parent="Theme.AppCompat.NoActionBar">
+    <item name="android:colorBackground">#FFFFFF</item>
+    <item name="android:textColor">#000000</item>
+  </style>
+  <style name="tabLayoutTextStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+    <item name="android:fontFamily">Roboto-Medium</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:lineSpacingMultiplier">1.19</item>
+  </style>
+  <!--<style name="IncomingChatTheme" parent ="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:windowActionBar">true</item>
+    <item name="android:actionBarStyle">@style/invisible_action_bar_style</item>
+  </style>-->
+ 
+</resources>

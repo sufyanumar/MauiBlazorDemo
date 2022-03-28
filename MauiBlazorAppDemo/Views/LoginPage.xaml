@@ -69,7 +69,7 @@
 
 
                     <StackLayout  Grid.Row="6" Grid.RowSpan="3"  Spacing="0"    VerticalOptions="FillAndExpand"  Orientation="Vertical">
-                        <Button x:Name="LoginButton" Text="Login" HorizontalOptions="FillAndExpand"    HeightRequest="56"  Command="{Binding SubmitCommand}" TextColor="{StaticResource textColor}" BackgroundColor="{StaticResource navyBlueLabelColor}"  Opacity="{OnPlatform Android='.4', iOS='.6'}" FontSize="18" CornerRadius="8" />
+                        <Button x:Name="LoginButton" Text="Login" HorizontalOptions="FillAndExpand"    HeightRequest="56"  TextColor="{StaticResource textColor}" BackgroundColor="{StaticResource navyBlueLabelColor}"  Opacity="{OnPlatform Android='.4', iOS='.6'}" FontSize="18" CornerRadius="8" />
                     </StackLayout>
                     <Button Grid.Row="7" Grid.RowSpan="1" Visual="Default" FontFamily="RobotoRegular" Text="Forgot password?"  HorizontalOptions="Center"  VerticalOptions="Start" BackgroundColor="Transparent"  Command="{Binding ForgotPasswordCommand}" TextColor="{StaticResource navyBlueLabelColor}" Opacity="0.9" FontSize="18" />
                 </Grid>

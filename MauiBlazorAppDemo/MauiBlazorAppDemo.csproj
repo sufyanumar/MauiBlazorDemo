@@ -59,15 +59,54 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Platforms\Android\Resources\drawable\logo.png" />
+	  <AndroidResource Remove="Platforms\Android\Resources\drawable\redline.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Content Remove="Properties\launchSettings.json" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\drawable\logo.png" />
+	  <None Remove="Platforms\Android\Resources\drawable\redline.png" />
+	  <None Remove="Platforms\Android\Resources\drawable\splash_screen.xml" />
+	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
+	  <None Remove="Resources\Images\activeChatIndicator.png" />
+	  <None Remove="Resources\Images\admin.png" />
 	  <None Remove="Resources\Images\apexlogo.png" />
+	  <None Remove="Resources\Images\ic_chat_bubble.png" />
+	  <None Remove="Resources\Images\ic_history.png" />
+	  <None Remove="Resources\Images\ic_profile_picture.png" />
+	  <None Remove="Resources\Images\notification_active.png" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Platforms\Android\Resources\drawable\logo.png" />
+	  <MauiImage Include="Platforms\Android\Resources\drawable\redline.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\ActiveChats.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ChatNotifications.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CustomControls\ChatListItem.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RecentChats.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

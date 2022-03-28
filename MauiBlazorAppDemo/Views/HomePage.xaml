@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiBlazorAppDemo.Views.HomePage"
+             xmlns:local="clr-namespace:MauiBlazorAppDemo.Views"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             Title="ApexChat"
+             BarBackgroundColor="White"
+             BackgroundColor="White"
+            android:TabbedPage.ToolbarPlacement="Bottom">
+    <TabbedPage.SelectedTabColor>
+        <OnPlatform x:TypeArguments="Color">
+            <On Platform="Android" Value="#0075E7"/>
+            <On Platform="iOS" Value="#0075E7"/>
+        </OnPlatform>
+    </TabbedPage.SelectedTabColor>
+    <TabbedPage.UnselectedTabColor>
+        <OnPlatform x:TypeArguments="Color">
+            <On Platform="Android" Value="#9aa0a5"/>
+            <On Platform="iOS" Value="#7B7B7B"/>
+        </OnPlatform>
+    </TabbedPage.UnselectedTabColor>
+    <TabbedPage.BarBackgroundColor>
+        <OnPlatform x:TypeArguments="Color">
+            <On Platform="Android" Value="#FFFFFF"/>
+            <On Platform="iOS" Value="#EDF4F7"/>
+        </OnPlatform>
+    </TabbedPage.BarBackgroundColor>
+    <NavigationPage.TitleView>
+        <Grid  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid HorizontalOptions="FillAndExpand" x:Name="TitleBar">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <AbsoluteLayout  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Image Source="admin.png">
+                        </Image>
+                        <Image Aspect="AspectFit" InputTransparent="True" AbsoluteLayout.LayoutBounds="0,0,0.3,0.3" AbsoluteLayout.LayoutFlags="All" Source="activechatindicator.png" />
+                    </AbsoluteLayout>
+                </Grid>
+                <Label Grid.Column="1"   Style="{StaticResource NavBarTitle}" MaxLines="1" LineBreakMode="TailTruncation" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" Text="Sufyan Umar" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding UserProfileCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Grid x:Name="IconDots" Grid.Column="2" Padding="20,0,0,0" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" IsVisible="false" >
+                    <Image  Margin="0,0,20,0" Source="Dots" VerticalOptions="Center" HorizontalOptions="End"/>
+                    <!--<Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowActionSheet"></TapGestureRecognizer>
+                    </Grid.GestureRecognizers>-->
+                </Grid>
+                <ActivityIndicator BackgroundColor="Transparent" Grid.Column="2" IsRunning="{Binding IsBusy}" VerticalOptions="Center" Margin="0,0,10,0" HorizontalOptions="Start" IsVisible="{Binding CanConductChats}"></ActivityIndicator>
+                <!--<customcontrols:CustomShowcaseViewStackLayout Grid.Column="2" Spacing="10" Padding="5,0,5,0" Margin="0,0,10,0" VerticalOptions="FillAndExpand" HorizontalOptions="EndAndExpand" Orientation="Horizontal" IsVisible="{Binding CanConductChats}">
+                    <customcontrols:CustomShowcaseViewStackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0,0,0,0" Android="0,0,5,0"></OnPlatform>
+                    </customcontrols:CustomShowcaseViewStackLayout.Margin>
+                    <Label HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" FontSize="13" FontAttributes="Bold" IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" MaxLines="1" Style="{StaticResource RobotoMedium}">
+                        <Label.TextColor>
+                            <OnPlatform Android="White" iOS="#2B2B2B"/>
+                        </Label.TextColor>
+                        <Label.Text>
+                            <Binding Path="IsActive">
+                                <Binding.Converter>
+                                    <converters:BooleanToObjectConverter x:TypeArguments="x:String">
+                                        <converters:BooleanToObjectConverter.TrueObject>
+                                            <x:String>ACTIVE</x:String>
+                                        </converters:BooleanToObjectConverter.TrueObject>
+                                        <converters:BooleanToObjectConverter.FalseObject>
+                                            <x:String>INACTIVE</x:String>
+                                        </converters:BooleanToObjectConverter.FalseObject>
+                                    </converters:BooleanToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </Label.Text>
+                    </Label>
+                    <customcontrols:CustomStatusSwitch x:Name="customStatusSwitchControl" VerticalOptions="Center" IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" IsToggled="{Binding IsActive}"/>
+                </customcontrols:CustomShowcaseViewStackLayout>-->
+            </Grid>
+            <StackLayout x:Name="LeadBar" IsVisible="False"  Orientation="Horizontal"
+                     Padding="10">
+                <Label Text="Leads"
+                   FontFamily="{StaticResource RobotoMedium}"
+                   FontSize="18"
+                   TextColor="Black"
+                   HorizontalOptions="Start"/>
+            </StackLayout>
+        </Grid>
+    </NavigationPage.TitleView>
+    <local:ChatNotifications Title="Notifications" IconImageSource="notification_active"/>
+    <local:ActiveChats Title="Active Chats" IconImageSource="ic_chat_bubble"/>
+    <local:RecentChats Title="Recent Chats" IconImageSource="ic_history"/>
+</TabbedPage>
