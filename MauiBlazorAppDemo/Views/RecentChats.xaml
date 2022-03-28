@@ -6,7 +6,7 @@
              Title="RecentChats"
              BackgroundColor="White">
     <StackLayout>
-        <ListView x:Name="ItemsListView" RowHeight="100">
+        <ListView x:Name="ItemsListView" RowHeight="100" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

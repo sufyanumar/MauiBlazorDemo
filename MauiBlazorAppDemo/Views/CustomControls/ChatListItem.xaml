@@ -36,7 +36,7 @@
                             </OnPlatform>
                         </Frame.HasShadow>
                     </Frame>
-                    <Frame HeightRequest="8" WidthRequest="8" Scale="1.6"  BackgroundColor="White"  CornerRadius="5"  HasShadow="True" AbsoluteLayout.LayoutBounds="0,0.1,0.2,0.2" AbsoluteLayout.LayoutFlags="All">
+                    <Frame HeightRequest="17" WidthRequest="15" Scale="1.6"  BackgroundColor="White"  CornerRadius="5"  HasShadow="True" AbsoluteLayout.LayoutBounds="0,0.1,0.2,0.2" AbsoluteLayout.LayoutFlags="All">
                         <Frame.HasShadow>
                             <OnPlatform x:TypeArguments="x:Boolean">
                                 <On Platform="Android" Value="True"/>
@@ -44,7 +44,7 @@
                             </OnPlatform>
                         </Frame.HasShadow>
                     </Frame>
-                    <Frame HeightRequest="5" WidthRequest="5" Scale="1.2"  CornerRadius="5"  HasShadow="True" AbsoluteLayout.LayoutBounds="0,0.1,0.2,0.2" AbsoluteLayout.LayoutFlags="All">
+                    <Frame HeightRequest="9" WidthRequest="10" Scale="1.2"  CornerRadius="5"  HasShadow="True" AbsoluteLayout.LayoutBounds="0,0.1,0.2,0.2" AbsoluteLayout.LayoutFlags="All">
                         <Frame.HasShadow>
                             <OnPlatform x:TypeArguments="x:Boolean">
                                 <On Platform="Android" Value="True"/>
@@ -89,7 +89,7 @@
                         <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" FontFamily="{StaticResource RobotoMedium}" Text="{Binding VisitorTitle}" TextColor="Black" FontSize="16" LineBreakMode="TailTruncation" MaxLines="1"/>
-                    <StackLayout Padding="3,6,2,3" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                    <StackLayout Margin="{OnPlatform WinUI='0,0,20,0', Default='0,0,5,0'}" Padding="3,6,2,3" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalOptions="FillAndExpand">
                         <Label HorizontalOptions="EndAndExpand" IsVisible="{Binding IsActiveChat}" HorizontalTextAlignment="End" LineBreakMode="CharacterWrap" MaxLines="1" Text="{Binding ChatStartedAt, Converter={StaticResource timeConverter}}" FontFamily="{StaticResource RobotoRegular}" TextColor="#666666" FontSize="12" />
                         <Label HorizontalOptions="EndAndExpand" IsVisible="{Binding IsActiveChat,Converter={StaticResource InverseBoolConverter}}"  HorizontalTextAlignment="End" LineBreakMode="CharacterWrap" MaxLines="1" Text="{Binding ChatEndedAt, Converter={StaticResource timeConverter}}" FontFamily="{StaticResource RobotoRegular}" TextColor="#666666" FontSize="12" />
                     </StackLayout>
@@ -141,35 +141,35 @@
                         <StackLayout Orientation="Horizontal">
                             <StackLayout IsVisible="{Binding IsDesktop}" Orientation="Horizontal" HorizontalOptions="Start">
                                 <Image Source="ic_desktop"/>
-                                <Label Text="Desktop" Style="{StaticResource SoureTagLabel}"/>
+                                <Label Text="Desktop" Style="{StaticResource SoureTagLabel}" Margin="1,0,0,0"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding IsExitPopup}" Orientation="Horizontal" HorizontalOptions="Start">
                                 <Image Source="ic_desktop"/>
-                                <Label Text="Exit Popup" Style="{StaticResource SoureTagLabel}"/>
+                                <Label Text="Exit Popup" Style="{StaticResource SoureTagLabel}" Margin="1,0,0,0"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding IsStatic}" Orientation="Horizontal" HorizontalOptions="Start">
                                 <Image Source="ic_desktop"/>
-                                <Label Text="Static Chat" Style="{StaticResource SoureTagLabel}"/>
+                                <Label Text="Static Chat" Style="{StaticResource SoureTagLabel}" Margin="1,0,0,0"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding IsPrechat}" Orientation="Horizontal" HorizontalOptions="Start">
                                 <Image Source="ic_desktop"/>
-                                <Label Text="Pre Chat" Style="{StaticResource SoureTagLabel}"/>
+                                <Label Text="Pre Chat" Style="{StaticResource SoureTagLabel}" Margin="1,0,0,0"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding IsSMS}" Orientation="Horizontal" HorizontalOptions="Start">
                                 <Image Source="ic_mobile"/>
-                                <Label Text="SMS" Style="{StaticResource SoureTagLabel}"/>
+                                <Label Text="SMS" Style="{StaticResource SoureTagLabel}" Margin="1,0,0,0"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding IsPhone}" Orientation="Horizontal" HorizontalOptions="Start">
                                 <Image Source="ic_mobile"/>
-                                <Label Text="Mobile" Style="{StaticResource SoureTagLabel}"/>
+                                <Label Text="Mobile" Style="{StaticResource SoureTagLabel}" Margin="1,0,0,0"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding IsTablet}" Orientation="Horizontal" HorizontalOptions="Start">
                                 <Image Source="ic_tablet"/>
-                                <Label Text="Tablet" Style="{StaticResource SoureTagLabel}"/>
+                                <Label Text="Tablet" Style="{StaticResource SoureTagLabel}" Margin="1,0,0,0"/>
                             </StackLayout>
                             <StackLayout IsVisible="{Binding IsFacebook}" Orientation="Horizontal" HorizontalOptions="Start">
                                 <Image Source="ic_facebook"/>
-                                <Label Text="Facebook" Style="{StaticResource SoureTagLabel}"/>
+                                <Label Text="Facebook" Style="{StaticResource SoureTagLabel}" Margin="1,0,0,0"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>

@@ -15,11 +15,11 @@ public partial class RecentChats : ContentPage
 		Items.Add(GetItem("Hasan Shahid", false, false, ""));
 		Items.Add(GetItem("Chat#291", false, true, "+98442234242"));
 		Items.Add(GetItem("Chat#991", true, false, "+98442234242"));
-		Items.Add(GetItem("Chat#991", true, false, "+98442234242"));
-		Items.Add(GetItem("Chat#991", true, false, "+98442234242"));
-		Items.Add(GetItem("Chat#991", true, false, "+98442234242"));
-		Items.Add(GetItem("Chat#991", true, false, "+98442234242"));
-		Items.Add(GetItem("Chat#991", true, false, "+98442234242"));
+		Items.Add(GetItem("Chat#645", true, false, "+98442234242"));
+		Items.Add(GetItem("Chat#773", false, false, "+98442234242"));
+		Items.Add(GetItem("John", false, true, ""));
+		Items.Add(GetItem("Chat#965", true, false, ""));
+		Items.Add(GetItem("+9988234244", true, true, "+98442234242"));
 
 		ItemsListView.ItemsSource = Items;
 	}
