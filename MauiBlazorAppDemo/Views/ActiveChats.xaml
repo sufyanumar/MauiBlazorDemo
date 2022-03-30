@@ -2,15 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiBlazorAppDemo.Views.ActiveChats"
+             xmlns:controls="clr-namespace:MauiBlazorAppDemo.Views.CustomControls"
              Title="ActiveChats"
              BackgroundColor="White">
     <StackLayout>
-        <Label Text="No Active Chats here"
-               VerticalTextAlignment="Center"
-               HorizontalTextAlignment="Center"
-                VerticalOptions="FillAndExpand" 
-                HorizontalOptions="FillAndExpand"
-               FontSize="20"
-               TextColor="Black"/>
+        <ListView x:Name="ItemsListView" RowHeight="100" SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <controls:ChatListItem/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>

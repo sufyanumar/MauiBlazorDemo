@@ -27,7 +27,7 @@
                 </Grid.ColumnDefinitions>
 
                 <AbsoluteLayout HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="0">
-                    <Frame CornerRadius="25" Padding="0" BackgroundColor="#0075E7" IsClippedToBounds="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <Frame CornerRadius="25" Padding="0" BackgroundColor="{Binding BackgroundColor}" IsClippedToBounds="True" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
                         <Image Source="ic_profile_picture" VerticalOptions="End" TranslationY="1"/>
                         <Frame.HasShadow>
                             <OnPlatform x:TypeArguments="x:Boolean">

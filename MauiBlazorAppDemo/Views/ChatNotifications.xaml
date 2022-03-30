@@ -2,15 +2,197 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiBlazorAppDemo.Views.ChatNotifications"
+             xmlns:converters="clr-namespace:MauiBlazorAppDemo.Data"
+             xmlns:customcontrol="clr-namespace:MauiBlazorAppDemo.Views.CustomControls"
              Title="ChatNotifications"
              BackgroundColor="White">
-    <StackLayout>
-        <Label Text="No new notifications"
-               VerticalTextAlignment="Center"
-               HorizontalTextAlignment="Center"
-                VerticalOptions="FillAndExpand" 
-                HorizontalOptions="FillAndExpand"
-               FontSize="20"
-               TextColor="Black"/>
-    </StackLayout>
+    <ContentPage.Resources>
+        <converters:AnyTrueMultiConverter x:Key="AnyTrueConverter" />
+        <ResourceDictionary>
+            <DataTemplate x:Key="ActiveNotification">
+                <ViewCell   x:Name="ActiveViewCell">
+                    <Grid BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <BoxView  Margin="0,0.5,0,0.5" Grid.Column="0" Grid.Row="0" BackgroundColor="#0075E7" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></BoxView>
+                        <Grid ColumnSpacing="10"  Grid.Column="1" Padding="0,13,15,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <!--<Label x:Name="InitiatedByby" Grid.Column="1" VerticalOptions="End"  Text="{Binding Source={x:Reference InitiatedBy}, Path=Text}" IsVisible="False" TextColor="Black"></Label>-->
+                            <!--<Label x:Name="InitiatedBy"  Text="{Binding InitiatedBy}" IsVisible="False" TextColor="Transparent"></Label>-->
+                            <Label x:Name="Id"  Text="{Binding ChatId}" IsVisible="False" TextColor="Transparent"></Label>
+
+                            <Grid Grid.Row="0" RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="38"></RowDefinition>
+                                    <RowDefinition Height="18"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Image   Source="{Binding NotificationTitle, Converter={StaticResource InitiatedbyInttoImgSrc}}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
+
+                                <Frame   HasShadow="False" CornerRadius="4" Grid.Row="1" HorizontalOptions="Center" BackgroundColor="Red" Padding="0" Margin="0" HeightRequest="16"  >
+                                    <Label Text="New" FontFamily="{StaticResource RobotoMedium}" FontSize="11" Margin="3,0,3,0"  TextColor="White" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" VerticalOptions="Center"></Label>
+                                </Frame>
+
+                            </Grid>
+                            <Grid Padding="0,0,0,6" Grid.Column="1" RowSpacing="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label x:Name="Msglbl"   VerticalTextAlignment="End" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="True" Grid.Row="0" LineBreakMode="TailTruncation" Margin="5,0,0,0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding NotificationTitle}" FontFamily="{StaticResource RobotoMedium}" FontAttributes="None" FontSize="15" TextColor="#415062"/>
+                                            <Span Text="  • "  TextColor="#5A6672"/>
+                                            <Span Text="{Binding SentOn, Converter={StaticResource NotificationTimeConverter}}" FontSize="14" FontFamily="{StaticResource RobotoRegular}"  TextColor="#5A6672"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <StackLayout TranslationX="5" Orientation="Horizontal"   Grid.Row="1">
+                                    <Label x:Name="visitorchatid" FontFamily="{StaticResource RobotoRegular}"  Margin="0,0,0,0" TextColor="#415062" Text="{Binding ChatId, StringFormat='ID: {0}', Converter={StaticResource ChatIdLastFiveDigitsConverter}}" FontSize="13" VerticalOptions="Center" VerticalTextAlignment="Start" HorizontalOptions="Start" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"></Label>
+                                    <Label x:Name="visitorphonenumber" Margin="0,0,0,0" TextColor="#415062" Text="{Binding PhoneNumber, StringFormat='| {0}'}" IsVisible="{Binding PhoneNumber, Converter={StaticResource StringToBoolConverter}}"  FontFamily="{StaticResource RobotoRegular}" FontSize="13" VerticalOptions="Center" VerticalTextAlignment="Start" HorizontalOptions="Start" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"></Label>
+                                </StackLayout>
+                                <StackLayout TranslationX="5" Orientation="Horizontal"   Grid.Row="2">
+
+                                    <Frame   HasShadow="False" CornerRadius="4" IsVisible="{Binding ChatType, Converter={StaticResource ChatTypeToBoolConverter}}" HorizontalOptions="Start" BackgroundColor="#EDF4F7" Padding="4,0,4,0" Margin="0" HeightRequest="14"  >
+                                        <StackLayout Orientation="Horizontal" Grid.Row="2">
+                                            <Image Source="turn_right.png"  HeightRequest="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
+                                            <Label Text="{Binding ChatType,Converter={StaticResource ChatTypeConverter}}" FontFamily="{StaticResource RobotoMedium}"  FontSize="10" Margin="-3,0,0,0"  TextColor="#5A6672" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" VerticalOptions="Center"></Label>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame   HasShadow="False" CornerRadius="4" IsVisible="{Binding Location, Converter={StaticResource PickedbyFrameVisitbltyConverter}}"  HorizontalOptions="Start" BackgroundColor="#EDF4F7" Padding="4,0,4,0" Margin="0" HeightRequest="14"  >
+                                    </Frame>
+                                </StackLayout>
+
+                            </Grid>
+                            <StackLayout Grid.Row="0" Grid.Column="3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer   Command="{Binding Path=BindingContext.AcceptChatCommand, Source={x:Reference ChatNotificationsView}}" CommandParameter="{x:Reference ActiveViewCell}" ></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image Source="accept.png" InputTransparent="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
+                            </StackLayout>
+                            <StackLayout Grid.Row="0" Grid.Column="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer   Command="{Binding Path=BindingContext.RejectChatCommand, Source={x:Reference ChatNotificationsView}}" CommandParameter="{x:Reference ActiveViewCell}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <Image Source="Reject" InputTransparent="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="InactiveNotification">
+                <ViewCell x:Name="InActiveViewCell">
+                    <Grid ColumnSpacing="0"  BackgroundColor="White" Padding="15,13,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="72"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <!--<Label x:Name="InitiatedByby" Grid.Column="1" VerticalOptions="End"  Text="{Binding Source={x:Reference InitiatedBy}, Path=Text}" IsVisible="False" TextColor="Black"></Label>
+                        <Label x:Name="InitiatedBy"  Text="{Binding InitiatedBy}" IsVisible="False" TextColor="Transparent"></Label>-->
+
+                        <Grid TranslationX="-5" Grid.Row="0" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="34"></RowDefinition>
+                                <RowDefinition Height="22"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding NotificationTitle, Converter={StaticResource InitiatedbyInttoImgSrc}}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
+                            <Image Source="{Binding NotificationPickedStatus, Converter={StaticResource ChatStatusImgSrcConverter}}" Grid.Row="1" Grid.Column="0"  VerticalOptions="FillAndExpand" HorizontalOptions="Start"></Image>
+                        </Grid>
+
+                        <Grid Padding="0,0,0,6" Grid.Column="1" RowSpacing="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="Msglbl"   VerticalTextAlignment="End" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="True" Grid.Row="0"  Margin="5,0,0,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding NotificationTitle}" FontFamily="{StaticResource RobotoMedium}"  FontAttributes="None" FontSize="15" TextColor="#415062"/>
+                                        <Span Text="  • "  TextColor="#5A6672"/>
+                                        <Span Text="{Binding SentOn, Converter={StaticResource NotificationTimeConverter}}" FontSize="14" FontFamily="{StaticResource RobotoRegular}"  TextColor="#5A6672"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout TranslationX="5" Orientation="Horizontal"   Grid.Row="1">
+                                <Label x:Name="visitorChatId" Margin="0,0,0,0" TextColor="#415062" Text="{Binding ChatId, StringFormat='ID: {0}', Converter={StaticResource ChatIdLastFiveDigitsConverter}}"  FontFamily="{StaticResource RobotoRegular}" FontSize="13" VerticalOptions="Center" VerticalTextAlignment="Start" HorizontalOptions="Start" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"></Label>
+
+                                <Label x:Name="visitorPhoneNumber" Margin="0,0,0,0" TextColor="#415062" Text="{Binding PhoneNumber, StringFormat='| {0}'}" IsVisible="{Binding PhoneNumber, Converter={StaticResource StringToBoolConverter}}"  FontFamily="{StaticResource RobotoRegular}" FontSize="13" VerticalOptions="Center" VerticalTextAlignment="Start" HorizontalOptions="Start" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"></Label>
+                            </StackLayout>
+
+                            <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal" Grid.Row="2" >
+                                <StackLayout Orientation="Horizontal" TranslationX="5" Grid.Row="2" >
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.OpenTextChatPageCommand, Source={x:Reference ChatNotificationsView}}" CommandParameter="{x:Reference InActiveViewCell}" />
+                                    </StackLayout.GestureRecognizers>
+                                    <Frame HasShadow="False" CornerRadius="4"  HorizontalOptions="Start" BackgroundColor="{Binding NotificationPickedStatus, Converter={StaticResource ChatStatusBackgroundColorConverter}} " Padding="4,0,4,0" Margin="0" HeightRequest="14"  >
+                                        <Frame.IsVisible>
+                                            <MultiBinding Converter="{StaticResource AnyTrueConverter}">
+                                                <Binding Source="{x:Reference pickedbyframe}" Path="IsVisible" Converter="{StaticResource InverseBoolConverter}" />
+                                                <Binding Path="." Converter="{StaticResource DeclinedPickedbyFrameVisibilityConverter}" />
+                                            </MultiBinding>
+                                        </Frame.IsVisible>
+                                        <Label Text="{Binding NotificationPickedStatus,Converter={StaticResource ChatStatusConverter}}" FontFamily="{StaticResource RobotoMedium}"  FontSize="10" Margin="3,0,3,0"  TextColor="{Binding NotificationPickedStatus,Converter={StaticResource ChatStatusTextColorConverter}}" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" VerticalOptions="Center" MaxLines="1"></Label>
+                                    </Frame>
+                                    <Frame x:Name="pickedbyframe" IsVisible="{Binding ChatPickedBy, Converter={StaticResource PickedbyFrameVisitbltyConverter}}"  HasShadow="False" CornerRadius="4" Grid.Row="2" HorizontalOptions="Start" BackgroundColor="#FDEDE2" Padding="4,0,4,0" Margin="0" HeightRequest="14">
+                                        <Label Text="{Binding ChatPickedBy, StringFormat='Picked by {0}'}" FontFamily="{StaticResource RobotoMedium}"  FontSize="10" Margin="3,0,3,0"  TextColor="#B6500C" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center"  HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" VerticalOptions="Center" MaxLines="1"></Label>
+                                    </Frame>
+                                    <Frame   HasShadow="False" CornerRadius="4" IsVisible="{Binding ChatType, Converter={StaticResource ChatTypeToBoolConverter}}" HorizontalOptions="Start" BackgroundColor="#EDF4F7" Padding="0" Margin="0" HeightRequest="14"  Grid.Row="2">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" WidthRequest="80" MinimumWidthRequest="45">
+                                            <Image Source="turn_right.png"  HeightRequest="10" VerticalOptions="FillAndExpand"></Image>
+                                            <Label Text="{Binding ChatType,Converter={StaticResource ChatTypeConverter}}" FontFamily="{StaticResource RobotoMedium}" MinimumWidthRequest="35" FontSize="10" Margin="-15,-7,0,0"  TextColor="#5A6672" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="Center" MaxLines="1" ></Label>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Frame   HasShadow="False" CornerRadius="4" IsVisible="{Binding Location, Converter={StaticResource PickedbyFrameVisitbltyConverter}}"  HorizontalOptions="Start" BackgroundColor="#EDF4F7" Padding="4,0,4,0" Margin="0,0,10,0" HeightRequest="14"  >
+                                        <Label Text="{Binding Location}" FontFamily="{StaticResource RobotoMedium}" LineBreakMode="TailTruncation"  FontSize="10" Margin="3,0,3,0"  TextColor="#5A6672" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" VerticalOptions="Center" MaxLines="1"></Label>
+                                    </Frame>
+                                </StackLayout>
+                            </ScrollView>
+                            <!--<Frame TranslationX="5"  IsVisible="{Binding  Path=IsVisible, Source={x:Reference pickedbyframe}, Converter={StaticResource InverseBoolConverter}}"  HasShadow="False" CornerRadius="4" Grid.Row="2" HorizontalOptions="Start" BackgroundColor="#EDF4F7" Padding="4,0,4,0" Margin="0" HeightRequest="14"  >
+                                <Label Text="{Binding ChatPickedBy}" FontFamily="{StaticResource RobotoMedium}"  FontSize="10" Margin="3,0,3,0"  TextColor="#5A6672" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" VerticalOptions="Center"></Label>
+                            </Frame>-->
+
+                        </Grid>
+
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <customcontrol:ChatNotificationTemplateSelector x:Key="ChatNotificationTemplateSelector" ActiveNotification="{StaticResource ActiveNotification}" InactiveNotification="{StaticResource InactiveNotification}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowSpacing="0" BackgroundColor="#EDF4F7" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="{Binding IsInternetVisible, Converter={StaticResource VisiblitytoHeightConverter}}"></RowDefinition>
+                <RowDefinition x:Name="ListViewRow" Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <ListView x:Name="ItemsListView" RowHeight="100" SelectionMode="None" 
+                          ItemTemplate="{StaticResource ChatNotificationTemplateSelector}"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

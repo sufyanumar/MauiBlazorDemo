@@ -74,6 +74,11 @@
 
             <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
             <converters:DateTimeToFriendlyTimeConverter x:Key="timeConverter" />
+            <converters:InitiatedbyInttoImgSrc x:Key="InitiatedbyInttoImgSrc" />
+            <converters:PickedbyFrameVisitbltyConverter x:Key="PickedbyFrameVisitbltyConverter" />
+            <converters:ChatTypeConverter x:Key="ChatTypeConverter" />
+            <converters:VisiblitytoHeightConverter x:Key="VisiblitytoHeightConverter" />
+            <converters:ChatStatusImgSrcConverter x:Key="ChatStatusImgSrcConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
