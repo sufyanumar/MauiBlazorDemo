@@ -22,7 +22,7 @@ namespace MauiBlazorAppDemo.Data
                 //{
                 //    return "desktop";
                 //}
-                return "web_active.png";
+                return "web_active";
             }
             else
             {
@@ -34,7 +34,7 @@ namespace MauiBlazorAppDemo.Data
                 //{
                 //    return "web_active";
                 //}
-                return "sms_profile.png";
+                return "sms_profile";
             }
            
         }

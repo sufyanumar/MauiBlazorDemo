@@ -11,19 +11,19 @@ namespace MauiBlazorAppDemo.Data
 
             if (status == (int)NotificationStatusEnum.Picked)
             {
-                return "check_small.png";
+                return "check_small";
             }
             else if (status == (int)NotificationStatusEnum.Rejected)
             {
-                return "cross_small.png";
+                return "cross_small";
             }
             else if (status == (int)NotificationStatusEnum.Missed)
             {
-                return "missed_small.png";
+                return "missed_small";
             }
             else if (status == (int)NotificationStatusEnum.NotPicked)
             {
-                return "missed_small.png";
+                return "missed_small";
             }
             return "";
         }

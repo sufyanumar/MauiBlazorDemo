@@ -70,7 +70,7 @@
 
                                     <Frame   HasShadow="False" CornerRadius="4" IsVisible="{Binding ChatType, Converter={StaticResource ChatTypeToBoolConverter}}" HorizontalOptions="Start" BackgroundColor="#EDF4F7" Padding="4,0,4,0" Margin="0" HeightRequest="14"  >
                                         <StackLayout Orientation="Horizontal" Grid.Row="2">
-                                            <Image Source="turn_right.png"  HeightRequest="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
+                                            <Image Source="turn_right"  HeightRequest="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
                                             <Label Text="{Binding ChatType,Converter={StaticResource ChatTypeConverter}}" FontFamily="{StaticResource RobotoMedium}"  FontSize="10" Margin="-3,0,0,0"  TextColor="#5A6672" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" VerticalOptions="Center"></Label>
                                         </StackLayout>
                                     </Frame>
@@ -83,7 +83,7 @@
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer   Command="{Binding Path=BindingContext.AcceptChatCommand, Source={x:Reference ChatNotificationsView}}" CommandParameter="{x:Reference ActiveViewCell}" ></TapGestureRecognizer>
                                 </StackLayout.GestureRecognizers>
-                                <Image Source="accept.png" InputTransparent="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
+                                <Image Source="accept" InputTransparent="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
                             </StackLayout>
                             <StackLayout Grid.Row="0" Grid.Column="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                                 <StackLayout.GestureRecognizers>
@@ -161,7 +161,7 @@
                                     </Frame>
                                     <Frame   HasShadow="False" CornerRadius="4" IsVisible="{Binding ChatType, Converter={StaticResource ChatTypeToBoolConverter}}" HorizontalOptions="Start" BackgroundColor="#EDF4F7" Padding="0" Margin="0" HeightRequest="14"  Grid.Row="2">
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" WidthRequest="80" MinimumWidthRequest="45">
-                                            <Image Source="turn_right.png"  HeightRequest="10" VerticalOptions="FillAndExpand"></Image>
+                                            <Image Source="turn_right"  HeightRequest="10" VerticalOptions="FillAndExpand"></Image>
                                             <Label Text="{Binding ChatType,Converter={StaticResource ChatTypeConverter}}" FontFamily="{StaticResource RobotoMedium}" MinimumWidthRequest="35" FontSize="10" Margin="-15,-7,0,0"  TextColor="#5A6672" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="Center" MaxLines="1" ></Label>
                                         </StackLayout>
                                     </Frame>
